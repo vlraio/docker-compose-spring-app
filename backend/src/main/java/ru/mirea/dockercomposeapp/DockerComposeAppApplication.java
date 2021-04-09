@@ -9,5 +9,4 @@ public class DockerComposeAppApplication {
     public static void main(String[] args) {
         SpringApplication.run(DockerComposeAppApplication.class, args);
     }
-
 }
