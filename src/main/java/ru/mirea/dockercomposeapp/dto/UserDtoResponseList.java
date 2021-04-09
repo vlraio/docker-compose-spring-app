@@ -5,6 +5,6 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class UserDtoList {
-    private List<UserDto> userDtos;
+public class UserDtoResponseList {
+    private List<UserDtoResponse> userDtos;
 }
