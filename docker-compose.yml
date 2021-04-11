@@ -1,0 +1,54 @@
+version: '3.9'
+
+services:
+
+  POSTGRES-db:
+    image: postgres:13.2
+    container_name: POSTGRES-db
+    restart: unless-stopped
+    ports:
+      - ${SERVER_POSTGRES_DB_PORT}:${POSTGRES_DB_PORT}
+    environment:
+      - POSTGRES_USER=${POSTGRES_DB_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_DB_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB_NAME}
+
+  MONGO-db:
+    image: mongo:4.4
+    container_name: MONGO-db
+    restart: unless-stopped
+    ports:
+      - ${SERVER_MONGO_DB_PORT}:${MONGO_DB_PORT}
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
+    env_file:
+      - .env
+    volumes:
+      - ./mongo-entrypoint:/docker-entrypoint-initdb.d
+
+  SERVER-MANAGER-service:
+    image: akimovve/docker-compose-app:backend-0.0.1
+    container_name: SERVER-MANAGER-service
+    restart: unless-stopped
+    depends_on:
+      - POSTGRES-db
+      - MONGO-db
+    ports:
+      - ${SERVER_MANAGER_SERVICE_PORT}:${SERVER_MANAGER_SERVICE_PORT}
+    environment:
+      - SERVER_PORT=${SERVER_MANAGER_SERVICE_PORT}
+      - SPRING_DATASOURCE_URL=${POSTGES_DB_URL}
+      - SPRING_DATASOURCE_USERNAME=${POSTGRES_DB_USER}
+      - SPRING_DATASOURCE_PASSWORD=${POSTGRES_DB_PASSWORD}
+      - SPRING_DATA_MONGODB_URI=${MONGO_DB_URI}
+
+  FRONTEND-service:
+    image: akimovve/docker-compose-app:frontend-0.0.1
+    container_name: FRONTEND-service
+    restart: unless-stopped
+    depends_on:
+      - SERVER-MANAGER-service
+    ports:
+      - ${FRONTEND_SERVICE_PORT}:${FRONTEND_SERVICE_PORT}
