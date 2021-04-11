@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-import UserList from './UserList'
+import UserList from './components/UserList'
 import './App.css'
 
 class App extends Component {
@@ -8,7 +8,7 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <Route path='/' exact={true} component={UserList} />
+          <Route path="/" exact={true} component={UserList} />
         </Switch>
       </Router>
     )

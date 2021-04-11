@@ -17,7 +17,7 @@ class UserList extends Component {
       isLoading: true
     })
 
-    fetch('users')
+    fetch('server-manager/api/users')
       .then(response => response.json())
       .then(({userDtos}) => this.setState({
         users: userDtos,
@@ -38,21 +38,21 @@ class UserList extends Component {
           <td>{user.firstName}</td>
           <td>{user.secondName}</td>
           <td>{user.age}</td>
-          <td><Link target='_blank'>{user.avatar}</Link></td>
+          <td><Link target="_blank">{user.avatar}</Link></td>
         </tr>
     )
 
     return (
-      <div className='mt-4'>
+      <div className="mt-4">
         <Container fluid>
           <h3>All users</h3>
-          <Table className='mt-4'>
+          <Table className="mt-4">
             <thead>
             <tr>
-              <th width='25%'>First name</th>
-              <th width='25%'>Second name</th>
-              <th width='10%'>Age</th>
-              <th width='40%'>Avatar link</th>
+              <th width="25%">First name</th>
+              <th width="25%">Second name</th>
+              <th width="10%">Age</th>
+              <th width="40%">Avatar link</th>
             </tr>
             </thead>
             <tbody>
