@@ -28,6 +28,3 @@ jobs:
         run: |
           docker build ./frontend -t akimovve/docker-compose-app:frontend-0.0.1
           docker push akimovve/docker-compose-app:frontend-0.0.1
-
-      - name: Start project
-        run: sh start.sh
