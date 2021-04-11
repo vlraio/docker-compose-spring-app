@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.mirea.dockercomposeapp.services.PhotoService;
 
 @RestController
-@RequestMapping("/img/usr")
+@RequestMapping("/server-manager/api/img/usr")
 @RequiredArgsConstructor
 public class PhotoController {
     private final PhotoService photoService;

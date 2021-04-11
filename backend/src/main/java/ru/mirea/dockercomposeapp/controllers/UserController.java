@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/server-manager/api/users")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;

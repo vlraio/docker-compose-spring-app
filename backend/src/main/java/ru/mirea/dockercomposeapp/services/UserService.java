@@ -54,7 +54,7 @@ public class UserService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("User with id " + userId + " was not found"));
         String avatarId = photoService.save(avatar);
-        user.setAvatar(new URL("http://localhost:" + serverPort + "/img/usr/" + avatarId));
+        user.setAvatar(new URL("http://localhost:" + serverPort + "/server-manager/api/img/usr/" + avatarId));
 
         return UserDtoResponse.builder()
                 .id(user.getId())
